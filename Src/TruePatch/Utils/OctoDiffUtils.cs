@@ -7,8 +7,6 @@ namespace TruePatch.Utils
 {
     public class OctoDiffUtils
     {
-        public static class OctoUtils
-        {
             public static void CalculateDelta(string sourcePath, string targetPath, string deltaPath, int quality = 3,
                 FilePatchProgress progressReporter = null)
             {
@@ -77,7 +75,7 @@ namespace TruePatch.Utils
                 {
                     using (var basisStream = new FileStream(sourcePath, FileMode.Open, FileAccess.Read, FileShare.Read))
                     {
-                        SignatureBuilder sb = new SignatureBuilder { ChunkSize = (short)chunkSize };
+                        var sb = new SignatureBuilder { ChunkSize = (short)chunkSize };
                         sb.Build(basisStream, new SignatureWriter(signatureStream));
                     }
 
@@ -88,9 +86,7 @@ namespace TruePatch.Utils
                     using (var deltaStream =
                         new FileStream(deltaPath, FileMode.Create, FileAccess.Write, FileShare.Read))
                     {
-                        IProgressReporter reporter = progressReporter;
-                        if (reporter == null)
-                            reporter = new NullProgressReporter();
+                        var reporter = progressReporter ?? (IProgressReporter) new NullProgressReporter();
 
                         new DeltaBuilder().BuildDelta(newFileStream, new SignatureReader(signatureStream, reporter),
                             new AggregateCopyOperationsDecorator(new BinaryDeltaWriter(deltaStream)));
@@ -106,9 +102,7 @@ namespace TruePatch.Utils
                 using (var newFileStream =
                     new FileStream(targetPath, FileMode.Create, FileAccess.ReadWrite, FileShare.Read))
                 {
-                    IProgressReporter reporter = progressReporter;
-                    if (reporter == null)
-                        reporter = new NullProgressReporter();
+                    var reporter = progressReporter ?? (IProgressReporter) new NullProgressReporter();
 
                     new DeltaApplier().Apply(basisStream, new BinaryDeltaReader(deltaStream, reporter), newFileStream);
                 }
@@ -147,6 +141,5 @@ namespace TruePatch.Utils
                     return arr2 == null;
                 }
             }
-        }
     }
 }

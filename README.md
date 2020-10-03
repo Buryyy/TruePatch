@@ -1,4 +1,5 @@
 # TruePatch
+[![CodeFactor](https://www.codefactor.io/repository/github/buryyy/truepatch/badge)](https://www.codefactor.io/repository/github/buryyy/truepatch)
 
 TruePatch is a flexible .NET cross-platform patching library for games and software. The delta updating is based on Octodiff's 100% managed implementation of remote delta compression. See more on  [OctoDiff](https://github.com/OctopusDeploy/Octodiff)'s github.
   - Easy to use and understand - fluent patch builder

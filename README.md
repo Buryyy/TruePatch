@@ -1,9 +1,9 @@
 # TruePatch
 
-TruePatch is a .NET cross-platform patching tool for games and software. The delta updating is based on Octodiff's 100% managed implementation of remote delta compression. See more on  [OctoDiff](https://github.com/OctopusDeploy/Octodiff)'s github.
-  - Easy to use and understand fluent patch builder
+TruePatch is a .NET cross-platform patching library for games and software. The delta updating is based on Octodiff's 100% managed implementation of remote delta compression. See more on  [OctoDiff](https://github.com/OctopusDeploy/Octodiff)'s github.
+  - Easy to use and understand - fluent patch builder
   - Choose a patching method easily with the builder by choosing either delta or checksum updating.
-  -Patch and download in parallel.
+  - Patch and download in parallel.
 
 # Experimental
 

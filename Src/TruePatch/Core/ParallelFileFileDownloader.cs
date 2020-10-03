@@ -7,7 +7,7 @@ using TruePatch.Models;
 
 namespace TruePatch.Core
 {
-    internal class ParallelFileDownloader : IParallelDownloader
+    internal class ParallelFileFileDownloader : IParallelFileDownloader
     {
         private const int MaxParallelization = 5;
 
@@ -17,7 +17,7 @@ namespace TruePatch.Core
         private readonly IList<Task> _downloadTasks;
         private readonly ConcurrentQueue<DownloadFile> _downloadQueue;
 
-        public ParallelFileDownloader(PatchContext patchContext)
+        public ParallelFileFileDownloader(PatchContext patchContext)
         {
             _patchContext = patchContext;
             _downloadQueue = new ConcurrentQueue<DownloadFile>();
@@ -32,9 +32,9 @@ namespace TruePatch.Core
 
         public void EnqueueFile(DownloadFile file) => _downloadQueue.Enqueue(file);
 
-        private void OnDownloadTimerElapsed(object sender, ElapsedEventArgs e) => ExecuteDownload();
+        private void OnDownloadTimerElapsed(object sender, ElapsedEventArgs e) => ProcessDownloads();
 
-        private void ExecuteDownload()
+        private void ProcessDownloads()
         {
             lock (_downloadTasks)
             {

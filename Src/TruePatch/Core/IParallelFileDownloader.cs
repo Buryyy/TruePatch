@@ -2,7 +2,7 @@
 
 namespace TruePatch.Core
 {
-    internal interface IParallelDownloader
+    internal interface IParallelFileDownloader
     {
         void EnqueueFile(DownloadFile file);
     }
